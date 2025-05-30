@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resident Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="resident.css">
+</head>
+<body>
+    <nav class="navigation">
+        <h2 class="head">APT APARTMENT</h2>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="account-details">
+            <h4>Account Details</h4>
+            <p><strong>House Number:</strong> A-123</p>
+            <p><strong>Block Number:</strong> B-45</p>
+            <p><strong>Occupation:</strong> Software Engineer</p>
+            <p><strong>Name:</strong> Shreen</p>
+            <p><strong>Family Members:</strong> 4</p>
+            <p><strong>Family Member Names:</strong></p>
+            <ul class="family-members-list">
+                <li>Shreen</li>
+                <li>Harini</li>
+                <li>Sowmiya</li>
+                <li>Maria</li>
+            </ul>
+        </div>
+
+        <h1 class="dashboard-title">Resident Dashboard</h1>
+
+        <!-- Feature Grid - Now in 2x2 Layout -->
+        <div class="feature-grid">
+            <a href="rmaintenance.html" class="card-link">
+                <div class="card">
+                    <i class="fa fa-wrench"></i>
+                    <h3>Maintenance</h3>
+                    <p>Check maintenance requests and issues.</p> 
+                </div>
+            </a>
+            
+            <a href="rvisitors.html" class="card-link">
+                <div class="card">
+                    <i class="fas fa-user-friends"></i>
+                    <h3>Visitors</h3>
+                    <p>Manage and track visitor entries.</p>
+                </div>
+            </a>
+
+            <a href="revent.html" class="card-link">
+                <div class="card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Events</h3>
+                    <p>Request and check event hall availability.</p>
+                </div>
+            </a>
+
+            <a href="rpay.html" class="card-link">
+                <div class="card">
+                    <i class="fas fa-credit-card"></i>
+                    <h3>Rent Payment Status</h3>
+                    <p>View and manage your rent payment status.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resident Rent Payment</title>
+  <link rel="stylesheet" href="rpay.css">
+</head>
+<body>
+   <nav class="navigation">
+        <div class="logo">
+            <h2 class="head">APT APARTMENT</h2>
+        </div>
+        
+    </nav>
+
+<main class="payment-dashboard">
+  <section class="payment-history">
+    <h2 class="section-title">Upcoming Rent Payments</h2>
+    <div class="history-list">
+      <div class="history-item">
+        <span class="date">01-Feb-2025</span>
+        <span class="amount">₹18,000</span>
+        <span class="status status-due">Due</span>
+      </div>
+      <div class="history-item">
+        <span class="date">01-Jan-2025</span>
+        <span class="amount">₹18,000</span>
+        <span class="status status-paid">Paid</span>
+      </div>
+    </div>
+    <button class="pay-now-btn" onclick="openPaymentModal()">Make Payment</button>
+  </section>
+</main>
+
+<!-- Payment Modal -->
+<div id="paymentModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3>Enter Payment Details</h3>
+    <form id="paymentForm">
+      <div class="form-group">
+        <label for="residentName">Full Name</label>
+        <input type="text" id="residentName" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="residentPhone">Phone Number</label>
+        <input type="tel" id="residentPhone" placeholder="Enter your phone number" required>
+      </div>
+      <div class="form-group">
+        <label for="residentEmail">Email Address</label>
+        <input type="email" id="residentEmail" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="paymentAmount">Amount to Pay</label>
+        <input type="number" id="paymentAmount" value="18000" required>
+      </div>
+      <div class="form-group">
+        <label for="paymentDate">Payment Date</label>
+        <input type="date" id="paymentDate" required>
+      </div>
+      <button type="button" class="submit-btn" onclick="submitPaymentForm(event)">Next</button>
+    </form>
+  </div>
+</div>
+
+<!-- Payment Method Modal -->
+<div id="paymentMethodModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3>Select Payment Method</h3>
+    <button class="submit-btn" onclick="showUPIForm()">Pay via UPI</button>
+    <button class="submit-btn" onclick="showQR()">Pay via QR Code</button>
+  </div>
+</div>
+
+<!-- UPI Payment Modal -->
+<div id="upiModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3>Enter UPI Payment Details</h3>
+    <form id="upiForm">
+      <div class="form-group">
+        <label for="upiID">UPI ID</label>
+        <input type="text" id="upiID" placeholder="Enter your UPI ID" required>
+      </div>
+      <div class="form-group">
+        <label for="upiAmount">Amount</label>
+        <input type="text" id="upiAmount" value="₹18,000" disabled>
+      </div>
+      <button type="submit" class="submit-btn">Submit Payment</button>
+    </form>
+  </div>
+</div>
+
+<script src="pr.js"></script>
+
+</body>
+
+</html>
+<script>// JavaScript to handle opening and closing modals
+    function openPaymentModal() {
+        document.getElementById("paymentModal").style.display = "block";
+      }
+      
+      function showUPIForm() {
+        document.getElementById("upiModal").style.display = "block";
+        document.getElementById("paymentMethodModal").style.display = "none";
+      }
+      
+      function showQR() {
+        alert("QR payment method is not yet implemented.");
+      }
+      
+      function closeModal() {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+          modal.style.display = 'none';
+        });
+      }
+      
+      // Handle payment form submission
+      function submitPaymentForm(event) {
+        event.preventDefault(); // Prevent form from submitting normally
+      
+        const residentName = document.getElementById('residentName').value;
+        const residentPhone = document.getElementById('residentPhone').value;
+        const residentEmail = document.getElementById('residentEmail').value;
+        const paymentAmount = document.getElementById('paymentAmount').value;
+        const paymentDate = document.getElementById('paymentDate').value;
+      
+        if (residentName && residentPhone && residentEmail && paymentAmount && paymentDate) {
+          // Close the current payment modal and show the payment method modal
+          document.getElementById("paymentModal").style.display = "none";
+          document.getElementById("paymentMethodModal").style.display = "block";
+        } else {
+          alert("Please fill out all the details.");
+        }
+      }
+      </script>

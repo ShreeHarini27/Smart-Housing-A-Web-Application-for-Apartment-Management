@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="avisitors.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <!-- Main Content -->
+    <main class="content">
+        <header>
+            <h2>Admin Dashboard</h2>
+            <div class="search-container">
+                <input type="text" id="search" class="search-input" placeholder="Search for a visitor..." oninput="searchNames()">
+                <button class="search-button"><i class="fas fa-search"></i></button>
+            </div>
+        </header>
+        
+        <section class="stats">
+            <div class="stat-box visitors"><i class="fas fa-users"></i><p>Visitors Today: 25</p></div>
+            <div class="stat-box appointments"><i class="fas fa-calendar-check"></i><p>Appointments: 12</p></div>
+            <div class="stat-box checkins"><i class="fas fa-sign-in-alt"></i><p>Checked In: 18</p></div>
+        </section>
+        
+        <section class="table-section">
+            <h3>Visitor List</h3>
+            <table class="table" id="visitorTable">
+                <thead>
+                    <tr>
+                        <th>Visitor Name</th>
+                        <th>Date In</th>
+                        <th>Date Out</th>
+                        <th>Time In</th>
+                        <th>Time Out</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Stefan</td><td>2024-12-10</td><td>2024-12-12</td><td>10:00 AM</td><td>5:00 PM</td></tr>
+                    <tr><td>Damon</td><td>2024-12-11</td><td>2024-12-12</td><td>9:00 AM</td><td>3:00 PM</td></tr>
+                    <tr><td>Klaus</td><td>2024-12-10</td><td>2024-12-12</td><td>10:00 AM</td><td>5:00 PM</td></tr>
+                    <tr><td>Elijah</td><td>2024-12-10</td><td>2024-12-12</td><td>10:00 AM</td><td>5:00 PM</td></tr>
+                    <tr><td>Elena</td><td>2024-12-10</td><td>2024-12-12</td><td>10:00 AM</td><td>5:00 PM</td></tr>
+                    <tr><td>Bonnie</td><td>2024-12-10</td><td>2024-12-12</td><td>10:00 AM</td><td>5:00 PM</td></tr>
+                    <tr><td>Caroline</td><td>2024-12-10</td><td>2024-12-12</td><td>11:00 AM</td><td>4:00 PM</td></tr>
+                    <tr><td>Matt</td><td>2024-12-10</td><td>2024-12-12</td><td>9:30 AM</td><td>6:00 PM</td></tr>
+                    <tr><td>Tyler</td><td>2024-12-10</td><td>2024-12-12</td><td>8:45 AM</td><td>5:15 PM</td></tr>
+                    <tr><td>Alaric</td><td>2024-12-10</td><td>2024-12-12</td><td>10:30 AM</td><td>4:45 PM</td></tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    
+    <script>
+        function searchNames() {
+            const query = document.getElementById("search").value.toLowerCase();
+            const rows = document.querySelectorAll("#visitorTable tbody tr");
+            rows.forEach(row => {
+                const nameCell = row.cells[0].textContent.toLowerCase();
+                row.style.display = nameCell.includes(query) ? "" : "none";
+            });
+        }
+    </script>
+</body>
+</html>

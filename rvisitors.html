@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="rvisitors.css">
+    <title>Visitor Dashboard</title>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="logo">
+            <h2 class="head">APT APARTMENT</h2>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="left-container">
+            <h1 class="dashboard-title">Visitor Form</h1>
+            <div class="form-container">
+                <h4>Enter Visitor Details</h4>
+                <form id="visitor-form">
+                    <div class="form-group">
+                        <label for="visitor-name">Visitor Name</label>
+                        <input type="text" id="visitor-name" name="visitor-name" placeholder="Enter visitor's name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date-in">Date In</label>
+                        <input type="date" id="date-in" name="date-in" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date-out">Date Out</label>
+                        <input type="date" id="date-out" name="date-out" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time-in">Time In</label>
+                        <input type="time" id="time-in" name="time-in" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time-out">Time Out</label>
+                        <input type="time" id="time-out" name="time-out" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="right-container">
+            <div class="visitor-list">
+                <button id="export-pdf" class="export-btn">Export as CV</button>
+                <h4>VISITOR LIST</h4>  
+                <div class="search-container">
+                    <input type="text" id="visitor-search" placeholder="Search Visitors">
+                </div>
+                <table id="visitor-table">
+                    <thead>
+                        <tr>
+                            <th>Visitor Name</th>
+                            <th>Date In</th>
+                            <th>Date Out</th>
+                            <th>Time In</th>
+                            <th>Time Out</th>
+                        </tr>
+                    </thead>
+                    <tbody id="visitor-list-body">
+
+                       
+                            <tr>
+                                <td>Shreen Cheeks</td>
+                                <td>2025-03-20</td>
+                                <td>2025-03-21</td>
+                                <td>10:00 AM</td>
+                                <td>02:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Shree Harini</td>
+                                <td>2025-03-18</td>
+                                <td>2025-03-18</td>
+                                <td>09:30 AM</td>
+                                <td>12:45 PM</td>
+                            </tr>
+                            <tr>
+                                <td>sowmiya</td>
+                                <td>2025-03-22</td>
+                                <td>2025-03-23</td>
+                                <td>11:15 AM</td>
+                                <td>05:30 PM</td>
+                            </tr>
+                        </tbody>
+                    
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const visitors = [];
+
+        document.getElementById("visitor-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            
+            const visitorData = {
+                visitorName: document.getElementById("visitor-name").value,
+                dateIn: document.getElementById("date-in").value,
+                dateOut: document.getElementById("date-out").value,
+                timeIn: document.getElementById("time-in").value,
+                timeOut: document.getElementById("time-out").value,
+            };
+            visitors.push(visitorData);
+            updateTable();
+            this.reset();
+        });
+
+        function updateTable() {
+            const tbody = document.getElementById("visitor-list-body");
+            tbody.innerHTML = visitors.map(visitor => `
+                <tr>
+                    <td>${visitor.visitorName}</td>
+                    <td>${visitor.dateIn}</td>
+                    <td>${visitor.dateOut}</td>
+                    <td>${visitor.timeIn}</td>
+                    <td>${visitor.timeOut}</td>
+                </tr>
+            `).join("");
+        }
+
+        document.getElementById("visitor-search").addEventListener("keyup", function () {
+    let filter = this.value.toLowerCase();
+    let rows = document.querySelectorAll("#visitor-table tbody tr");
+
+    rows.forEach(row => {
+        let text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? "" : "none";
+    });
+});
+
+</script>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("export-pdf").addEventListener("click", function () {
+        let table = document.getElementById("visitor-table"); // Correct table selection
+
+        if (!table) {
+            alert("Error: Table not found!");
+            return;
+        }
+
+        // Convert the HTML table to a worksheet
+        let worksheet = XLSX.utils.table_to_sheet(table);
+        let workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Visitor_List");
+
+        // Trigger download
+        XLSX.writeFile(workbook, "Visitor_List.xlsx");  // Exports as Excel file
+    });
+});
+</script>
+
+    
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f4f4f9, #e1e1e6); /* Updated background */
+    color: #333; /* Updated text color */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 40px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard-title {
+    font-family: 'Playfair Display', serif;
+    color: #2a2a72; /* Dark blue */
+    font-size: 32px;
+    margin-bottom: 40px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Filter Section */
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.filter-container label {
+    font-size: 16px;
+    color: #2a2a72; /* Dark blue */
+    margin-right: 10px;
+}
+
+#priority-filter {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 2px solid rgba(42, 42, 114, 0.4); /* Dark blue border */
+    background: #ffffff; /* Light background */
+    color: #333; /* Text color */
+    font-size: 14px;
+}
+
+#priority-filter:focus {
+    outline: none;
+    border-color: #2a2a72; /* Focus border color */
+}
+
+/* Button Styles */
+.action-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.action-button.show-resolved {
+    background: #009ffd; /* Soft blue */
+    color: #fff;
+}
+
+.action-button.show-resolved:hover {
+    background: #2a2a72; /* Dark blue */
+    transform: translateY(-3px);
+}
+
+/* Back Icon */
+.back-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 20px;
+    color: #2a2a72; /* Dark blue */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: none; /* Initially hidden */
+}
+
+.back-icon:hover {
+    transform: translateY(-3px);
+}
+
+/* Request Containers */
+.requests-container, .resolved-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Request Card */
+.request-card {
+    background: linear-gradient(145deg, #e1e1e6, #d0d0d0); /* Light gradient background */
+    border-radius: 15px;
+    padding: 20px 30px;
+    border: 2px solid rgba(42, 42, 114, 0.4); /* Dark blue border */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.request-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(42, 42, 114, 0.8); /* Hover shadow */
+}
+
+.request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.resident-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #2a2a72; /* Dark blue */
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.status.pending {
+    background: #ffcc00; /* Yellow for pending status */
+    color: #333;
+}
+
+.status.resolved {
+    background: #4caf50; /* Green for resolved status */
+    color: #fff;
+}
+
+.request-body {
+    color: #333; /* Text color */
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.request-body p strong {
+    color: #2a2a72; /* Dark blue for strong text */
+}
+
+.request-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.action-button.resolve {
+    background: #009ffd; /* Soft blue */
+    color: #fff;
+}
+
+.action-button.resolve:hover {
+    background: #2a2a72; /* Dark blue */
+    transform: translateY(-3px);
+}
+
+.action-button.delete {
+    background: #e74c3c; /* Red for delete */
+    color: #fff;
+}
+
+.action-button.delete:hover {
+    background: #c0392b; /* Darker red */
+    transform: translateY(-3px);
+}
+
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #2a2a72;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    left: 0;  /* Ensure the navbar spans from the left edge */
+    margin: 0 auto; /* Centering navbar if needed */
+}
+.head {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+    .navigation {
+        padding: 10px 20px;  /* Adjust padding for smaller screens */
+    }
+}

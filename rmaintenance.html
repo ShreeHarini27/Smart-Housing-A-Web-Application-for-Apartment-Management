@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="rmaintenance.css">
+</head>
+
+<body>
+    <nav class="navigation">
+        <div class="logo">
+            <h2 class="head">APT APARTMENT</h2>
+        </div>
+        
+    </nav>
+    <!-- Page Title -->
+    <!-- <header>
+        <div class="header-container">
+            <i class="fas fa-tools header-icon"></i>
+            <h1 class="dashboard-title">Maintenance Dashboard</h1>
+        </div>
+    </header> -->
+
+    <!-- Form Section -->
+    <section class="maintenance-form">
+        <h2>Submit a Maintenance Request</h2>
+        <form id="maintenance-form">
+            <label for="issue-type">Issue Type:</label>
+            <select id="issue-type" name="issue-type">
+                <option value="plumbing">Plumbing</option>
+                <option value="electrical">Electrical</option>
+                <option value="appliances">Appliances</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="priority">Priority:</label>
+            <select id="priority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" placeholder="Describe the issue..." rows="5"></textarea>
+
+            <button type="submit" class="submit-button">Submit Request</button>
+        </form>
+    </section>
+
+    <!-- Request Table -->
+    <section class="maintenance-history">
+        <h2>Previous Requests</h2>
+        <table id="request-table">
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Issue</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Date Submitted</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Request rows will appear here -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Success Modal -->
+    <div id="modal" >
+        <div class="modal-content">
+            <p>Request Submitted Successfully!</p>
+            <button class="close-btn">Close</button>
+        </div>
+    </div>
+<script>
+    document.getElementById('maintenance-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the form from submitting
+
+    // Get form data
+    const issueType = document.getElementById('issue-type').value;
+    const priority = document.getElementById('priority').value;
+    const description = document.getElementById('description').value;
+
+    // Validate that all fields have values
+    if (issueType && priority && description) {
+        // Add a new row to the request table
+        const requestTable = document.getElementById('request-table').getElementsByTagName('tbody')[0];
+        const newRow = document.createElement('tr');
+        const currentDate = new Date().toLocaleDateString();
+        const requestId = Math.floor(Math.random() * 1000); // Generate a random ID for the request
+
+        newRow.innerHTML = `
+            <td>${requestId}</td>
+            <td>${issueType.charAt(0).toUpperCase() + issueType.slice(1)}</td>
+            <td><span class="status pending">Pending</span></td>
+            <td>${priority.charAt(0).toUpperCase() + priority.slice(1)}</td>
+            <td>${currentDate}</td>
+        `;
+        requestTable.appendChild(newRow);
+
+        // Show the success modal
+        const modal = document.getElementById('modal'); // Locate the modal element
+        modal.classList.add('show'); // Add the 'show' class to make the modal visible
+
+        // Reset the form
+        document.getElementById('maintenance-form').reset();
+    }
+});
+
+// Close modal functionality
+document.querySelector('.close-btn').addEventListener('click', function() {
+    const modal = document.getElementById('modal'); // Locate the modal element
+    modal.classList.remove('show'); // Remove the 'show' class to hide the modal
+});
+
+
+</script>
+
+    
+</body>
+</html>

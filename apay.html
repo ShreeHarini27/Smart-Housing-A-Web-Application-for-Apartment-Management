@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Rent Payment Management</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .navigation {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: #2a2a72;
+        }
+
+
+        .head {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* Admin Dashboard */
+        .admin-dashboard {
+            width: 100%;
+            max-width: 100%;
+            margin: 15px auto;
+            padding: 0 10px;
+        }
+
+        /* Dashboard Summary */
+        .dashboard-summary {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .summary-cards {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(42, 42, 114, 0.1);
+            flex: 1;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 12px rgba(42, 42, 114, 0.2);
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #2a2a72;
+        }
+
+        .card p {
+            font-size: 22px;
+            font-weight: bold;
+            color: #009ffd;
+        }
+
+        /* Search Bar and Filter */
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .search-bar input,
+        .search-bar select {
+            padding: 12px 20px;
+            border-radius: 20px;
+            border: 1px solid #009ffd;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .search-bar input:focus,
+        .search-bar select:focus {
+            border-color: #2a2a72;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        /* Payment Table Styling */
+        .payment-management {
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 6px rgba(42, 42, 114, 0.2);
+            margin-top: 30px;
+        }
+
+        .payment-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .payment-table th,
+        .payment-table td {
+            border: 1px solid #2a2a72;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .payment-table th {
+            background: #2a2a72;
+            color: white;
+            font-weight: bold;
+        }
+
+        .payment-table td {
+            background: #f4f4f9;
+            color: #333;
+        }
+
+        .mark-paid {
+            background: #009ffd;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+      
+        .mark-paid:hover {
+            background: #2a2a72;
+        }
+
+       /* Remove Button Styling */
+.remove-btn {
+    background: #ff4d4d; /* Red color */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: background 0.3s ease;
+}
+
+.remove-btn:hover {
+    background: #cc0000; /* Darker red on hover */
+}
+
+
+        /* Add Payment Form */
+        .add-payment {
+            background: none;
+            padding: 15px;
+            border:none;
+            margin-top: 20px;
+            box-shadow: none;
+            width: 50%;
+            margin: 30px auto;
+        }
+
+        .add-payment input {
+            width: 100%;
+            margin: 8px 0;
+            padding: 8px;
+            border: 2px solid #2a2a72;
+            background: #f4f4f9;
+            color: #333;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            background: #009ffd;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #2a2a72;
+        }
+
+        /* Success Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .popup-content button {
+            background: #009ffd;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup-content button:hover {
+            background: #2a2a72;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-summary {
+                flex-direction: column;
+            }
+
+            .summary-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .summary-cards .card {
+                margin-bottom: 15px;
+            }
+
+            .search-bar input,
+            .search-bar select {
+                width: 100%;
+                font-size: 14px;
+            }
+
+            .add-payment {
+                width: 80%;
+            }
+        }
+
+        /* Graph Styling */
+        .dashboard-graph {
+            width: 100%;
+            height: 200px;
+            margin-top: 20px;
+        }
+
+        #totalPaymentsBar {
+            width: 100%;
+            height: 100% !important;
+        }
+     .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.export-btn {
+    background: #ff9800; /* Orange color */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.export-btn:hover {
+    background: #e68900; /* Darker orange on hover */
+}
+
+    </style>
+</head>
+
+<body>
+    <nav class="navigation">
+            <h2 class="head">APT APARTMENT - Admin</h2>
+        </div>
+    </nav>
+
+    <main class="admin-dashboard">
+        <!-- Dashboard Overview -->
+        <section class="dashboard-summary">
+            <h2 class="section-title">Dashboard Overview</h2>
+
+            <!-- Bar Graph for Total Payments -->
+            <div class="dashboard-graph">
+                <canvas id="totalPaymentsBar"></canvas>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="card total-payments">
+                    <h3>Total Rent Collected</h3>
+                    <p id="totalRentCollected">₹4,50,000</p>
+                </div>
+                <div class="card pending-payments">
+                    <h3>Pending Payments</h3>
+                    <p id="pendingRent">₹80,000</p>
+                </div>
+                <div class="card total-residents">
+                    <h3>Total Residents</h3>
+                    <p>25</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Bar with Filter -->
+        <section class="search-bar">
+            <input type="text" id="searchResident" placeholder="Search by name..." onkeyup="searchResident()">
+            <select id="paymentFilter" onchange="filterPayments()">
+                <option value="">Filter by Status</option>
+                <option value="paid">Paid</option>
+                <option value="due">Due</option>
+            </select>
+        </section>
+
+        <!-- Resident Payment Table -->
+        <section class="payment-management">
+    <div class="header-container">
+        <h2 class="section-title">Resident Rent Payments</h2>
+        <button class="export-btn" onclick="exportCV()">Export CV</button>
+    </div>
+    <table class="payment-table">
+        <thead>
+            <tr>
+                <th>Resident Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Amount</th>
+                <th>Payment Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="paymentTableBody">
+            <!-- Payment Records (existing rows) -->
+            <tr>
+                <td>Ram</td>
+                <td>9876543210</td>
+                <td>Ramrr.com</td>
+                <td>₹18,000</td>
+                <td>01-Feb-2025</td>
+                <td><span class="status status-due">Due</span></td>
+                <td>
+                    <button class="mark-paid" onclick="markPaid(this)">Mark as Paid</button>
+                    <button class="remove-btn" onclick="removePayment(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>kane</td>
+                <td>9123456780</td>
+                <td>kane554@example.com</td>
+                <td>₹18,000</td>
+                <td>01-Jan-2025</td>
+                <td><span class="status status-paid">Paid</span></td>
+                <td>
+                    <button class="mark-paid" onclick="markPaid(this)">Mark as Paid</button>
+                    <button class="remove-btn" onclick="removePayment(this)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+        <!-- Add Payment Form -->
+        <section class="add-payment">
+            <form id="manualPaymentForm">
+                <h3>Add Payment Record</h3>
+                <input type="text" id="residentName" placeholder="Resident Name" required>
+                <input type="tel" id="residentPhone" placeholder="Phone Number" required>
+                <input type="email" id="residentEmail" placeholder="Email Address" required>
+                <input type="number" id="paymentAmount" placeholder="Amount" required>
+                <input type="date" id="paymentDate" required>
+                <button type="button" class="submit-btn" onclick="addPayment()">Add Payment</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Success Popup -->
+    <div id="successPopup" class="popup">
+        <div class="popup-content">
+            <h3>Payment Added Successfully!</h3>
+            <button onclick="closePopup()">OK</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Import Chart.js -->
+    <script>
+        // Bar Graph for Total Payments
+        const ctxBar = document.getElementById('totalPaymentsBar').getContext('2d');
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+                datasets: [{
+                    label: 'Total Rent Collected (₹)',
+                    data: [350000, 360000, 380000, 400000],
+                    backgroundColor: 'rgba(42, 42, 114, 0.6)',
+                    borderColor: 'rgba(42, 42, 114, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Search Resident Function
+        function searchResident() {
+            const input = document.getElementById('searchResident').value.toUpperCase();
+            const table = document.getElementById('paymentTableBody');
+            const tr = table.getElementsByTagName('tr');
+            for (let i = 0; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName('td')[0];
+                if (td) {
+                    const textValue = td.textContent || td.innerText;
+                    tr[i].style.display = textValue.toUpperCase().indexOf(input) > -1 ? '' : 'none';
+                }
+            }
+        }
+
+        // Filter Payments by Status
+        function filterPayments() {
+            const filter = document.getElementById('paymentFilter').value;
+            const table = document.getElementById('paymentTableBody');
+            const tr = table.getElementsByTagName('tr');
+            for (let i = 0; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName('td')[5];
+                if (td) {
+                    const status = td.textContent || td.innerText;
+                    if (filter === '' || status.toLowerCase() === filter.toLowerCase()) {
+                        tr[i].style.display = '';
+                    } else {
+                        tr[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        // Mark Payment as Paid
+        function markPaid(button) {
+            const row = button.closest('tr');
+            const statusCell = row.querySelector('td:nth-child(6)');
+            statusCell.innerHTML = '<span class="status status-paid">Paid</span>';
+        }
+
+      // Add Payment Function (Now Includes Remove Button)
+function addPayment() {
+    const name = document.getElementById('residentName').value;
+    const phone = document.getElementById('residentPhone').value;
+    const email = document.getElementById('residentEmail').value;
+    const amount = document.getElementById('paymentAmount').value;
+    const date = document.getElementById('paymentDate').value;
+
+    if (name && phone && email && amount && date) {
+        const table = document.getElementById('paymentTableBody');
+        const row = table.insertRow();
+        row.innerHTML = `
+            <td>${name}</td>
+            <td>${phone}</td>
+            <td>${email}</td>
+            <td>₹${amount}</td>
+            <td>${date}</td>
+            <td><span class="status status-due">Due</span></td>
+            <td>
+                <button class="mark-paid" onclick="markPaid(this)">Mark as Paid</button>
+                <button class="remove-btn" onclick="removePayment(this)">Remove</button>
+            </td>
+        `;
+        document.getElementById('manualPaymentForm').reset();
+        showPopup();
+    }
+}
+
+// Remove Payment Record
+function removePayment(button) {
+    const row = button.closest('tr');
+    row.remove();
+}
+
+
+        // Show Success Popup
+        function showPopup() {
+            const popup = document.getElementById('successPopup');
+            popup.style.display = 'flex';
+        }
+
+        // Close Success Popup
+        function closePopup() {
+            const popup = document.getElementById('successPopup');
+            popup.style.display = 'none';
+        }
+      // Export CV function
+function exportCV() {
+    const table = document.getElementById("paymentTableBody");
+    let csvContent = "Resident Name,Phone,Email,Amount,Payment Date,Status\n"; // Header row
+
+    // Loop through the rows and extract data
+    const rows = table.getElementsByTagName("tr");
+    for (let i = 0; i < rows.length; i++) {
+        const cols = rows[i].getElementsByTagName("td");
+        let row = [];
+        for (let j = 0; j < cols.length - 1; j++) { // Exclude the last column (Action buttons)
+            row.push(cols[j].textContent.trim());
+        }
+        csvContent += row.join(",") + "\n";
+    }
+
+    // Create a downloadable CSV file
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", "Resident_Rent_Payments.csv");
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
+    </script>
+</body>
+
+</html>

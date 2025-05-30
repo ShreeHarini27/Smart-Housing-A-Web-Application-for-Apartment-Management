@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAINTENANCE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="amaintenance.css">
+</head>
+<body>
+    <nav class="navigation">
+        <h2 class="head">APT APARTMENT</h2>
+    </div>
+</nav>
+    <i class="fas fa-arrow-left back-icon" onclick="goBack()"></i>
+<br> </br>
+    <div class="dashboard-container">
+        <h1 class="dashboard-title">MAINTENANCE</h1>
+
+        <!-- Filter and Resolved Button -->
+        <div class="filter-container">
+            <div>
+                <label for="priority-filter">Filter by Priority:</label>
+                <select id="priority-filter">
+                    <option value="all">All</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <button class="action-button show-resolved" onclick="showResolved()">Show Resolved Problems</button>
+        </div>
+
+        <div class="requests-container" id="requests-container">
+            <!-- Request Card 1 -->
+            <div class="request-card" data-status="pending" data-priority="medium">
+                <div class="request-header">
+                    <span class="resident-name">Ravi Kumar</span>
+                    <span class="status pending">Pending</span>
+                </div>
+                <div class="request-body">
+                    <p><strong>Issue:</strong> Electrical</p>
+                    <p><strong>Description:</strong> Flickering lights in the hallway</p>
+                    <p><strong>Priority:</strong> Medium</p>
+                    
+                </div>
+                <div class="request-actions">
+                    <button class="action-button resolve" onclick="markAsResolved(this)">Mark as Resolved</button>
+                    <button class="action-button delete" onclick="deleteRequest(this)">Delete</button>
+                </div>
+            </div>
+
+            <!-- Request Card 2 -->
+            <div class="request-card" data-status="pending" data-priority="high">
+                <div class="request-header">
+                    <span class="resident-name">Priya Desai</span>
+                    <span class="status pending">Pending</span>
+                </div>
+                <div class="request-body">
+                    <p><strong>Issue:</strong> Plumbing</p>
+                    <p><strong>Description:</strong> Leaking faucet in the kitchen</p>
+                    <p><strong>Priority:</strong> High</p>
+                    
+                </div>
+                <div class="request-actions">
+                    <button class="action-button resolve" onclick="markAsResolved(this)">Mark as Resolved</button>
+                    <button class="action-button delete" onclick="deleteRequest(this)">Delete</button>
+                </div>
+            </div>
+
+            <!-- Request Card 3 -->
+            <div class="request-card" data-status="pending" data-priority="low">
+                <div class="request-header">
+                    <span class="resident-name">Anil Sharma</span>
+                    <span class="status pending">Pending</span>
+                </div>
+                <div class="request-body">
+                    <p><strong>Issue:</strong> Painting</p>
+                    <p><strong>Description:</strong> Peeling paint in the living room</p>
+                    <p><strong>Priority:</strong> Low</p>
+                   
+                </div>
+                <div class="request-actions">
+                    <button class="action-button resolve" onclick="markAsResolved(this)">Mark as Resolved</button>
+                    <button class="action-button delete" onclick="deleteRequest(this)">Delete</button>
+                </div>
+            </div>
+
+            <!-- Request Card 4 -->
+            <div class="request-card" data-status="pending" data-priority="high">
+                <div class="request-header">
+                    <span class="resident-name">Neha Gupta</span>
+                    <span class="status pending">Pending</span>
+                </div>
+                <div class="request-body">
+                    <p><strong>Issue:</strong> Air Conditioning</p>
+                    <p><strong>Description:</strong> Air conditioner not cooling</p>
+                    <p><strong>Priority:</strong> High</p>
+                    
+                </div>
+                <div class="request-actions">
+                    <button class="action-button resolve" onclick="markAsResolved(this)">Mark as Resolved</button>
+                    <button class="action-button delete" onclick="deleteRequest(this)">Delete</button>
+                </div>
+            </div>
+
+            <!-- More request cards can be added in a similar way -->
+        </div>
+
+        <div class="resolved-container" id="resolved-container" style="display: none;">
+            <!-- Resolved requests will appear here -->
+        </div>
+    </div>
+
+    <script>
+        const requestsContainer = document.getElementById("requests-container");
+        const resolvedContainer = document.getElementById("resolved-container");
+        const backIcon = document.querySelector(".back-icon");
+        const filterContainer = document.querySelector(".filter-container");
+        const dashboardTitle = document.querySelector(".dashboard-title");
+        const priorityFilter = document.getElementById("priority-filter");
+
+        let allRequestsHTML = requestsContainer.innerHTML; // Store the original state of requests
+
+        // Function to filter requests by priority
+        priorityFilter.addEventListener("change", function() {
+            const filterValue = this.value;
+            const cards = document.querySelectorAll(".request-card");
+
+            cards.forEach(card => {
+                const cardPriority = card.getAttribute("data-priority");
+                if (filterValue === "all" || filterValue === cardPriority) {
+                    card.style.display = "block"; // Show card
+                } else {
+                    card.style.display = "none"; // Hide card
+                }
+            });
+        });
+
+        function markAsResolved(button) {
+            const card = button.closest(".request-card");
+            // Change status
+            card.querySelector(".status").classList.replace("pending", "resolved");
+            card.querySelector(".status").textContent = "Resolved";
+            
+            // Hide "Mark as Resolved" button
+            card.querySelector(".resolve").style.display = "none";
+            
+            // Move the card to resolved requests
+            resolvedContainer.appendChild(card);
+        }
+
+        function deleteRequest(button) {
+            const card = button.closest(".request-card");
+            card.remove();
+        }
+
+        function showResolved() {
+            backIcon.style.display = "block";
+            filterContainer.style.display = "none";
+            dashboardTitle.textContent = "RESOLVED PROBLEMS";
+            requestsContainer.style.display = "none";
+            resolvedContainer.style.display = "block";
+        }
+
+        function goBack() {
+            backIcon.style.display = "none";
+            filterContainer.style.display = "flex";
+            dashboardTitle.textContent = "MAINTENANCE";
+            requestsContainer.style.display = "block";
+            resolvedContainer.style.display = "none";
+        }
+    </script>
+</body>
+</html>

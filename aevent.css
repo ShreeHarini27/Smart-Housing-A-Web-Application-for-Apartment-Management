@@ -1,0 +1,179 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background: url('bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    line-height: 1.6;
+}
+
+.content {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+h2 {
+    color: #2a2a72;
+}
+
+/* Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px 15px;
+    border-radius: 25px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    width: 280px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    background: white;
+}
+
+/* Updated Search Icon */
+.search-icon {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #2a2a72;
+}
+
+/* Add Event Button */
+.add-event-btn {
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #009ffd, #2a2a72);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+    transition: all 0.3s ease-in-out;
+}
+
+.add-event-btn:hover {
+    background: linear-gradient(135deg, #2a2a72, #009ffd);
+    transform: scale(1.05);
+}
+.navigation {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: #2a2a72;
+}
+.head {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.table th {
+    background: #2a2a72;
+    color: white;
+}
+
+.table tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Input Fields */
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+/* Add Event Button in Modal */
+.modal-content button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #009ffd, #2a2a72);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+.modal-content button:hover {
+    background: linear-gradient(135deg, #2a2a72, #009ffd);
+    transform: scale(1.05);
+}
+
