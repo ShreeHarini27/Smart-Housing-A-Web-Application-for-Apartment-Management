@@ -45,3 +45,43 @@ This project is **frontend-only** and focuses on clean design, organized UI, and
 1. Clone the repository
 2. Open homepage.html in your browser
 
+---
+## 📦 Folder Structure
+
+smart-housing/
+│
+|── homepage.html             # Homepage
+├── login.html                # Landing/Login Page
+├── resident.html             # Resident dashboard
+├── admin.html                # Admin dashboard
+├── revent.html               # Resident Event Page
+├── rmaintenance.html         # Resident Maintenance
+├── rpay.html                 # Resident Payment
+├── rvisitors.html            # Resident Visitors
+├── aevent.html               # Admin Event
+├── amaintenance.html         # Admin Maintenance
+├── apay.html                 # Admin Payment
+├── avisitors.html            # Admin Visitors
+│
+├── styles/                   # All CSS files
+│   └── homepage.css            # Homepage
+    └──  login.css              # Landing/Login Page
+    └── resident.css            # Resident dashboard
+    └── admin.css               # Admin dashboard
+    └── revent.css              # Resident Event Page
+    └── rmaintenance.css        # Resident Maintenance
+    └── rpay.css                # Resident Payment
+    └── rvisitors.css           # Resident Visitors
+    └── aevent.css              # Admin Event
+    └── amaintenance.css        # Admin Maintenance
+    └── apay.css                # Admin Payment
+    └── avisitors.css           # Admin Visitors
+│
+├── assets/                   # All static assets (images/icons)
+│   └── images/
+│       ├── background.jpg
+│       └── logo.png
+│
+├── README.md                 # Project description
+
+
